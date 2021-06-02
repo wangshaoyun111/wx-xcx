@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 47));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
 //
 //
 //
@@ -142,10 +142,30 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      swiperList: [] // 轮播图数据
+    };
+  },
+  onLoad: function onLoad() {
+    // 调用获取轮播图数据方法
+    this.getSwiperList();
+  },
+  methods: {
+    // 获取轮播图数据方法
+    getSwiperList: function getSwiperList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  uni.$http.get('/api/public/v1/home/swiperdata'));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;if (!(
+
+                res.meta.status !== 200)) {_context.next = 6;break;}return _context.abrupt("return",
+                uni.showToast({
+                  title: '轮播图数据获取失败',
+                  icon: 'none',
+                  duration: 1500 }));case 6:
 
 
-  } };exports.default = _default;
+                // 返回数据赋值给swiperList
+                _this.swiperList = res.message;case 7:case "end":return _context.stop();}}}, _callee);}))();
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 ],[[11,"common/runtime","common/vendor"]]]);
