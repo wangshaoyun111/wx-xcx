@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App'
+// 导入请求文件
+import './common/request.js'
 
 Vue.config.productionTip = false
 
