@@ -20,7 +20,20 @@
     <view class="floor-list">
       <view class="floor-item" v-for="(item,index) in floorList" :key='index'>
         <!-- 楼层标题 -->
-        <image class="floor-title" :src="item.floor_title.image_src"></image>
+        <image class="floor-title" :src="item.floor_title.image_src" ></image>
+        <!-- 楼层图片 -->
+        <view class="floor-img-box">
+          <!-- 左侧大图片盒子 -->
+          <view class="left-img-box">
+            <image :src="item.product_list[0].image_src"  mode="widthFix" :style=" {width:item.product_list[0].image_width + 'rpx'}"></image>
+          </view>
+          <!-- 右侧小图片盒子 -->
+          <view class="right-img-box">
+            <view class="right-img-item" v-for="(item1,index1) in item.product_list" :key="index1" v-if="index1 !== 0">
+              <image :src="item1.image_src" mode="widthFix" :style=" {width:item1.image_width + 'rpx'}"></image>
+            </view>
+          </view>
+        </view>
       </view>
     </view>
 	</view>
@@ -102,6 +115,15 @@ swiper{
   .floor-title{
     height: 60rpx;
     width: 100%;
+  }
+  .right-img-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .floor-img-box{
+    display: flex;
+    margin-left: 10rpx;
   }
 }
 </style>
