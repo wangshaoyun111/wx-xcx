@@ -12,7 +12,7 @@
     </swiper>
     <!-- 分类导航区域 -->
     <view class="nav-list">
-      <view class="nav-item" v-for="(item,index) in navList" :key="index">
+      <view class="nav-item" v-for="(item,index) in navList" :key="index" @click="toCatePage(item)">
         <image :src="item.image_src"></image>
       </view>
     </view>
@@ -34,6 +34,14 @@
       this.getNavList()
     },
     methods:{
+      // 跳转到导航页面
+      toCatePage(item){
+        if(item.name === '分类') {
+          uni.switchTab({
+            url:'/pages/cate/cate'
+          })
+        }
+      },
       // 调用获取分类导航的方法
       async getNavList() {
         const {data:res} = await uni.$http.get('/api/public/v1/home/catitems')

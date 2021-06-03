@@ -173,6 +173,14 @@ var _default =
     this.getNavList();
   },
   methods: {
+    // 跳转到导航页面
+    toCatePage: function toCatePage(item) {
+      if (item.name === '分类') {
+        uni.switchTab({
+          url: '/pages/cate/cate' });
+
+      }
+    },
     // 调用获取分类导航的方法
     getNavList: function getNavList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   uni.$http.get('/api/public/v1/home/catitems'));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;if (!(
