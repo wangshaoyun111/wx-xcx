@@ -168,13 +168,7 @@ var _default =
     getSwiperList: function getSwiperList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   uni.$http.get('/api/public/v1/home/swiperdata'));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;if (!(
 
-                res.meta.status !== 200)) {_context.next = 6;break;}return _context.abrupt("return",
-                uni.showToast({
-                  title: '轮播图数据获取失败',
-                  icon: 'none',
-                  duration: 1500 }));case 6:
-
-
+                res.meta.status !== 200)) {_context.next = 6;break;}return _context.abrupt("return", uni.$showTost());case 6:
                 // 返回数据赋值给swiperList
                 _this.swiperList = res.message;case 7:case "end":return _context.stop();}}}, _callee);}))();
     } } };exports.default = _default;
