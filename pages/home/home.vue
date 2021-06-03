@@ -24,14 +24,14 @@
         <!-- 楼层图片 -->
         <view class="floor-img-box">
           <!-- 左侧大图片盒子 -->
-          <view class="left-img-box">
+          <navigator class="left-img-box" :url="item.product_list[0].url">
             <image :src="item.product_list[0].image_src"  mode="widthFix" :style=" {width:item.product_list[0].image_width + 'rpx'}"></image>
-          </view>
+          </navigator>
           <!-- 右侧小图片盒子 -->
           <view class="right-img-box">
-            <view class="right-img-item" v-for="(item1,index1) in item.product_list" :key="index1" v-if="index1 !== 0">
+            <navigator :url="item1.url" class="right-img-item" v-for="(item1,index1) in item.product_list" :key="index1" v-if="index1 !== 0">
               <image :src="item1.image_src" mode="widthFix" :style=" {width:item1.image_width + 'rpx'}"></image>
-            </view>
+            </navigator>
           </view>
         </view>
       </view>
@@ -61,6 +61,11 @@
       async getFloorList() {
         const {data:res} = await uni.$http.get('/api/public/v1/home/floordata')
         if(res.meta.status !== 200) return  uni.$showTost()
+        res.message.forEach(item => {
+          item.product_list.forEach(value =>{
+            value.url = '/subpkg/goods_list/goods_list?' + value.navigator_url.split('?')[1]
+          })
+        })
         this.floorList = res.message
       },
       // 跳转到导航页面
