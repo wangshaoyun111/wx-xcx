@@ -16,6 +16,13 @@
         <image :src="item.image_src"></image>
       </view>
     </view>
+    <!-- 楼层区域 -->
+    <view class="floor-list">
+      <view class="floor-item" v-for="(item,index) in floorList" :key='index'>
+        <!-- 楼层标题 -->
+        <image class="floor-title" :src="item.floor_title.image_src"></image>
+      </view>
+    </view>
 	</view>
 </template>
 
@@ -24,7 +31,8 @@
 		data() {
 			return {
 				swiperList:[], // 轮播图数据
-        navList:[] // 分类导航数组
+        navList:[], // 分类导航数据
+        floorList:[] // 楼层导航数据
 			};
 		},
     onLoad() {
@@ -32,8 +40,16 @@
       this.getSwiperList()
       // 调用获取分类导航的方法
       this.getNavList()
+      // 调用获取楼层标题的方法
+      this.getFloorList()
     },
     methods:{
+      // 获取楼层标题的方法
+      async getFloorList() {
+        const {data:res} = await uni.$http.get('/api/public/v1/home/floordata')
+        if(res.meta.status !== 200) return  uni.$showTost()
+        this.floorList = res.message
+      },
       // 跳转到导航页面
       toCatePage(item){
         if(item.name === '分类') {
@@ -79,6 +95,13 @@ swiper{
   image{
     width: 128rpx;
     height: 140rpx;
+  }
+}
+// 楼层区域
+.floor-list{
+  .floor-title{
+    height: 60rpx;
+    width: 100%;
   }
 }
 </style>
