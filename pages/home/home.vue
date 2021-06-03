@@ -10,6 +10,12 @@
         </navigator>
       </swiper-item>
     </swiper>
+    <!-- 分类导航区域 -->
+    <view class="nav-list">
+      <view class="nav-item" v-for="(item,index) in navList" :key="index">
+        <image :src="item.image_src"></image>
+      </view>
+    </view>
 	</view>
 </template>
 
@@ -17,14 +23,24 @@
 	export default {
 		data() {
 			return {
-				swiperList:[] // 轮播图数据
+				swiperList:[], // 轮播图数据
+        navList:[] // 分类导航数组
 			};
 		},
     onLoad() {
       // 调用获取轮播图数据方法
       this.getSwiperList()
+      // 调用获取分类导航的方法
+      this.getNavList()
     },
     methods:{
+      // 调用获取分类导航的方法
+      async getNavList() {
+        const {data:res} = await uni.$http.get('/api/public/v1/home/catitems')
+        // 后台返回状态码判断
+        if(res.meta.status !== 200) return  uni.$showTost()
+        this.navList = res.message
+      },
       // 获取轮播图数据方法
       async getSwiperList(){
         const {data:res} = await uni.$http.get('/api/public/v1/home/swiperdata')
@@ -45,6 +61,16 @@ swiper{
   image{
     width: 100%;
     height: 100%;
+  }
+}
+// 分类导航样式
+.nav-list{
+  display: flex;
+  justify-content: space-around;
+  margin: 16rpx 0rpx;
+  image{
+    width: 128rpx;
+    height: 140rpx;
   }
 }
 </style>

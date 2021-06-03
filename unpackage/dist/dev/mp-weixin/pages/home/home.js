@@ -152,25 +152,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
-      swiperList: [] // 轮播图数据
+      swiperList: [], // 轮播图数据
+      navList: [] // 分类导航数组
     };
   },
   onLoad: function onLoad() {
     // 调用获取轮播图数据方法
     this.getSwiperList();
+    // 调用获取分类导航的方法
+    this.getNavList();
   },
   methods: {
-    // 获取轮播图数据方法
-    getSwiperList: function getSwiperList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  uni.$http.get('/api/public/v1/home/swiperdata'));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;if (!(
+    // 调用获取分类导航的方法
+    getNavList: function getNavList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  uni.$http.get('/api/public/v1/home/catitems'));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;if (!(
 
                 res.meta.status !== 200)) {_context.next = 6;break;}return _context.abrupt("return", uni.$showTost());case 6:
+                _this.navList = res.message;case 7:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    // 获取轮播图数据方法
+    getSwiperList: function getSwiperList() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var _yield$uni$$http$get2, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+                  uni.$http.get('/api/public/v1/home/swiperdata'));case 2:_yield$uni$$http$get2 = _context2.sent;res = _yield$uni$$http$get2.data;if (!(
+
+                res.meta.status !== 200)) {_context2.next = 6;break;}return _context2.abrupt("return", uni.$showTost());case 6:
                 // 返回数据赋值给swiperList
-                _this.swiperList = res.message;case 7:case "end":return _context.stop();}}}, _callee);}))();
+                _this2.swiperList = res.message;case 7:case "end":return _context2.stop();}}}, _callee2);}))();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
