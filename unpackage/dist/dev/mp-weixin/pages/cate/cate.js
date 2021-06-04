@@ -130,12 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
 //
 //
 //
@@ -157,14 +152,28 @@ var _default =
   data: function data() {
     return {
       wh: 0, // 客用窗口高度
-      active: 0 };
-
+      active: 0, // 被激活的分类
+      cateList: [] // 分类数组
+    };
   },
   onLoad: function onLoad() {
     // 获取窗口可用高度
     var systenInfo = uni.getSystemInfoSync();
     this.wh = systenInfo.windowHeight;
-  } };exports.default = _default;
+    // 获取分类数据方法
+    this.getCateList();
+  },
+  methods: {
+    // 丁一获取分类数据方法
+    getCateList: function getCateList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  uni.$http.get('/api/public/v1/categories'));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;if (!(
+                res.meta.status !== 200)) {_context.next = 6;break;}return _context.abrupt("return", uni.$showTost());case 6:
+                _this.cateList = res.message;case 7:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    // 切换一级分类
+    changeActive: function changeActive(index) {
+      this.active = index;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
