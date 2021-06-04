@@ -147,13 +147,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
       wh: 0, // 客用窗口高度
       active: 0, // 被激活的分类
-      cateList: [] // 分类数组
+      cateList: [], // 一级分类数组
+      cateLevel2: [] // 二级分类数据
     };
   },
   onLoad: function onLoad() {
@@ -168,11 +172,13 @@ var _default =
     getCateList: function getCateList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   uni.$http.get('/api/public/v1/categories'));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;if (!(
                 res.meta.status !== 200)) {_context.next = 6;break;}return _context.abrupt("return", uni.$showTost());case 6:
-                _this.cateList = res.message;case 7:case "end":return _context.stop();}}}, _callee);}))();
+                _this.cateList = res.message;
+                _this.cateLevel2 = res.message[0].children;case 8:case "end":return _context.stop();}}}, _callee);}))();
     },
     // 切换一级分类
     changeActive: function changeActive(index) {
       this.active = index;
+      this.cateLevel2 = this.cateList[index].children;
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

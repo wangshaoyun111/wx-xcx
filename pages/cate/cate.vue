@@ -9,7 +9,10 @@
       </scroll-view>
       <!-- 右侧二级三级分类 -->
       <scroll-view scroll-y class="right-scroll-view" :style="{height: wh + 'px'}">
-        <view class="">1</view>
+        <!-- 渲染二级分类 -->
+        <view class="cate-level2" v-for="(item,index) in cateLevel2" :key='index'>
+          <view class="cate-level2-title">/{{item.cat_name}}/</view>
+        </view>
       </scroll-view>
     </view>
 	</view>
@@ -21,7 +24,8 @@
 			return {
 				wh:0, // 客用窗口高度
         active:0 ,// 被激活的分类
-        cateList:[], // 分类数组
+        cateList:[], // 一级分类数组
+        cateLevel2:[] // 二级分类数据
 			};
 		},
     onLoad() {
@@ -37,10 +41,12 @@
         const {data:res} = await uni.$http.get('/api/public/v1/categories')
         if(res.meta.status !== 200) return uni.$showTost()
         this.cateList = res.message
+        this.cateLevel2 = res.message[0].children
       },
       // 切换一级分类
       changeActive(index){
         this.active = index
+        this.cateLevel2 = this.cateList[index].children
       }
     }
 	}
@@ -71,6 +77,14 @@
           transform: translateY(-50%);
         }
       }
+    }
+  }
+  .right-scroll-view{
+    .cate-level2-title{
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 16px 0;
     }
   }
 }
