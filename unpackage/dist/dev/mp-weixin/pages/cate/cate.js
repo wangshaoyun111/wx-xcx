@@ -145,12 +145,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
-      wh: 0 // 客用窗口高度
-    };
+      wh: 0, // 客用窗口高度
+      active: 0 };
+
   },
   onLoad: function onLoad() {
     // 获取窗口可用高度
