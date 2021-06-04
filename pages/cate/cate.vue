@@ -9,9 +9,17 @@
       </scroll-view>
       <!-- 右侧二级三级分类 -->
       <scroll-view scroll-y class="right-scroll-view" :style="{height: wh + 'px'}">
-        <!-- 渲染二级分类 -->
+        
         <view class="cate-level2" v-for="(item,index) in cateLevel2" :key='index'>
+          <!-- 渲染二级分类 -->
           <view class="cate-level2-title">/{{item.cat_name}}/</view>
+          <!-- 渲染三级分类 -->
+          <view class="cate-level3-list">
+            <view class="cate-level3-item" v-for="(value,idx) in item.children" :key='idx'>
+              <image :src="value.cat_icon" mode=""></image>
+              <text>{{value.cat_name}}</text>
+            </view>
+          </view>
         </view>
       </scroll-view>
     </view>
@@ -85,6 +93,24 @@
       font-size: 12px;
       font-weight: bold;
       margin: 16px 0;
+    }
+    .cate-level3-list{
+      display: flex;
+      flex-wrap: wrap;
+      .cate-level3-item{
+        width: 33.33%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 12px;
+        image{
+          width: 60px;
+          height: 60px;
+        }
+        text{
+          font-size: 12px;
+        }
+      }
     }
   }
 }
