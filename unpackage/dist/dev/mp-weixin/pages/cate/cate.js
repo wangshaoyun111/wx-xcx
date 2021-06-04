@@ -165,8 +165,9 @@ var _default =
       wh: 0, // 客用窗口高度
       active: 0, // 被激活的分类
       cateList: [], // 一级分类数组
-      cateLevel2: [] // 二级分类数据
-    };
+      cateLevel2: [], // 二级分类数据
+      scrollTop: 0 };
+
   },
   onLoad: function onLoad() {
     // 获取窗口可用高度
@@ -187,6 +188,9 @@ var _default =
     changeActive: function changeActive(index) {
       this.active = index;
       this.cateLevel2 = this.cateList[index].children;
+      // 因为我们给 scrollTop设置为0 再次动态设置为0 所以返回顶部没有任何效果
+      // 每次设置为0不生效，每次设置时判断是否为0，是0时设置0.1让返回顶部生效
+      this.scrollTop = this.scrollTop === 0 ? 0.1 : 0;
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

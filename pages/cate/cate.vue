@@ -8,7 +8,7 @@
         </block>
       </scroll-view>
       <!-- 右侧二级三级分类 -->
-      <scroll-view scroll-y class="right-scroll-view" :style="{height: wh + 'px'}">
+      <scroll-view scroll-y class="right-scroll-view" :style="{height: wh + 'px'}" :scroll-top="scrollTop">
         
         <view class="cate-level2" v-for="(item,index) in cateLevel2" :key='index'>
           <!-- 渲染二级分类 -->
@@ -33,7 +33,8 @@
 				wh:0, // 客用窗口高度
         active:0 ,// 被激活的分类
         cateList:[], // 一级分类数组
-        cateLevel2:[] // 二级分类数据
+        cateLevel2:[], // 二级分类数据
+        scrollTop:0,
 			};
 		},
     onLoad() {
@@ -55,6 +56,9 @@
       changeActive(index){
         this.active = index
         this.cateLevel2 = this.cateList[index].children
+        // 因为我们给 scrollTop设置为0 再次动态设置为0 所以返回顶部没有任何效果
+        // 每次设置为0不生效，每次设置时判断是否为0，是0时设置0.1让返回顶部生效
+        this.scrollTop = this.scrollTop === 0 ? 0.1 : 0
       }
     }
 	}
