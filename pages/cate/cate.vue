@@ -2,14 +2,14 @@
 	<view>
 		<view class="scroll-view-container">
 		  <!-- 左侧一级分类 -->
-      <scroll-view scroll-y class="left-scroll-view" :style="{height: wh + 'px}">
+      <scroll-view scroll-y="true" class="left-scroll-view" :style="{height: wh + 'px'}">
         <view class="scroll-view-item">1</view>
       </scroll-view>
       <!-- 右侧二级三级分类 -->
-      <scroll-view scroll-y class="right-scroll-view" :style="{height: wh + 'px}">
+      <scroll-view scroll-y class="right-scroll-view" :style="{height: wh + 'px'}">
         <view class="scroll-view-item">1</view>
       </scroll-view>
-		</view>
+    </view>
 	</view>
 </template>
 
