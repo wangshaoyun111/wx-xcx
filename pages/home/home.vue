@@ -106,6 +106,7 @@
 
 <style lang="scss">
   .search-box{
+    // 实现吸顶效果
     position: sticky;
     top: 0;
     z-index: 999;
