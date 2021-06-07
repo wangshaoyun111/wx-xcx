@@ -1,7 +1,7 @@
 <template>
 	<view>
     <!-- 搜索区域 -->
-    <my-search></my-search>
+    <my-search @click="gotoSearch"></my-search>
 		<view class="scroll-view-container">
 		  <!-- 左侧一级分类 -->
       <scroll-view scroll-y="true" class="left-scroll-view" :style="{height: wh + 'px'}">
@@ -47,6 +47,11 @@
       this.getCateList()
     },
     methods:{
+      gotoSearch(){
+        uni.navigateTo({
+          url: '/subpkg/search/search'
+        })
+      },
       // 丁一获取分类数据方法
       async getCateList(){
         const {data:res} = await uni.$http.get('/api/public/v1/categories')

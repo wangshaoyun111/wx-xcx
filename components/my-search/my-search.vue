@@ -1,6 +1,6 @@
 <template>
 	<view class="my-search-container" :style="{'background-color':bgcColor}">
-		<view class="my-search-box" :style="{'border-radius':radius + 'px'}">
+		<view class="my-search-box" @click="searchBoxHandler" :style="{'border-radius':radius + 'px'}">
       <uni-icons type="search" size="17"></uni-icons>
       <text class="searchText">搜索</text>
 		</view>
@@ -26,6 +26,13 @@
         type:Number,
         default:16
       }
+    },
+    methods:{
+       // 点击了模拟的 input 输入框
+        searchBoxHandler() {
+          // 触发外界通过 @click 绑定的 click 事件处理函数
+          this.$emit('click')
+        }
     }
 	}
 </script>

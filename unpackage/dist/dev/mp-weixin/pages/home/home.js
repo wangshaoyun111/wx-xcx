@@ -222,6 +222,11 @@ var _default =
     this.getFloorList();
   },
   methods: {
+    gotoSearch: function gotoSearch() {
+      uni.navigateTo({
+        url: '/subpkg/search/search' });
+
+    },
     // 获取楼层标题的方法
     getFloorList: function getFloorList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   uni.$http.get('/api/public/v1/home/floordata'));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;if (!(
