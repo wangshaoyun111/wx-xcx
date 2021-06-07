@@ -197,7 +197,7 @@ var _default =
   onLoad: function onLoad() {
     // 获取窗口可用高度
     var systenInfo = uni.getSystemInfoSync();
-    this.wh = systenInfo.windowHeight;
+    this.wh = systenInfo.windowHeight - 50;
     // 获取分类数据方法
     this.getCateList();
   },
