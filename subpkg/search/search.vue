@@ -6,9 +6,21 @@
     </view>
     <!-- 搜索建议区域 -->
     <view class="sugg-list">
-      <view class="sugg-item" v-for="(item,index) in searchResart" :key="index">
+      <view class="sugg-item" v-for="(item,index) in searchResart" :key="index" @click="goToDetail(item.goods_id)">
         <view class="goods-name">{{item.goods_name}}</view>
         <uni-icons type="arrowright" size="16"></uni-icons>
+      </view>
+    </view>
+    <!-- 搜索历史区域 -->
+    <view class="history-list">
+      <!-- 搜索历史标题 -->
+      <view class="history-title">
+        <text>搜索历史</text>
+        <uni-icons type="trash" size="16"></uni-icons>
+      </view>
+      <!-- 搜索历史结果 -->
+      <view class="history-result">
+        <uni-tag class="uni-tag" v-for="(item,index) in historyList" :key="index" :text="item"></uni-tag>
       </view>
     </view>
   </view>
@@ -21,9 +33,16 @@
         timerId:null, // 防抖变量
         keyVal:'', // 用户搜索关键字
         searchResart:[], // 用户搜索建议列表
+        historyList:['11','22','33'] // 搜索历史列表
       };
     },
     methods:{
+      // 跳转到商品详情
+      goToDetail(id){
+        uni.navigateTo({
+          url:"/subpkg/goods_detail/goods_detail?goods_id=" + id
+        })
+      },
       // 获取用户关键字方法
       inputHandle(e){
         clearTimeout(this.timerId)
@@ -74,4 +93,24 @@
     text-overflow: ellipsis;
   }
 }
+
+  .history-title{
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    border-bottom: 1px solid #efefef;
+  }
+  .history-result{
+    display: flex;
+    flex-wrap: warp;
+  }
+  .uni-tag{
+    margin-top: 6px;
+    margin-right: 6px;
+  }
+
+
+
 </style>
