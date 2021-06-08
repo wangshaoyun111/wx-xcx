@@ -11,7 +11,8 @@
     data() {
       return {
         timerId:null, // 防抖变量
-        keyVal:'' // 用户搜索关键字
+        keyVal:'', // 用户搜索关键字
+        searchResart:[], // 用户搜索建议列表
       };
     },
     methods:{
@@ -21,8 +22,18 @@
         // 防抖，获取最后一次输入内容
         this.timerId = setTimeout(()=>{
           this.keyVal = e
-          console.log(this.keyVal);
+          this.getSearchResult()
         },500)
+      },
+      // 获取用户搜索建议方法
+      async getSearchResult(){
+        if(this.keyVal === '') {
+          this.searchResart = []
+          return
+        }
+        const {data:res} = await uni.$http.get('/api/public/v1/goods/qsearch',{query:this.keyVal})
+        if(res.meta.status !== 200) return uni.$showTost()
+        this.searchResart = res.message
       }
     }
   }
