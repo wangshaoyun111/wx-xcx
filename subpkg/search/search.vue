@@ -1,7 +1,15 @@
 <template>
   <view>
+    <!-- 搜索按钮区域 -->
     <view class="search-box">
       <uni-search-bar @input="inputHandle" radius="100" cancelButton="none"></uni-search-bar>
+    </view>
+    <!-- 搜索建议区域 -->
+    <view class="sugg-list">
+      <view class="sugg-item" v-for="(item,index) in searchResart" :key="index">
+        <view class="goods-name">{{item.goods_name}}</view>
+        <uni-icons type="arrowright" size="16"></uni-icons>
+      </view>
     </view>
   </view>
 </template>
@@ -27,7 +35,9 @@
       },
       // 获取用户搜索建议方法
       async getSearchResult(){
-        if(this.keyVal === '') {
+        // 判断有没有关键字
+        if(this.keyVal.trim().length === 0) {
+          this.keyVal = ''
           this.searchResart = []
           return
         }
@@ -44,5 +54,24 @@
   position: sticky;
   top: 0;
   z-index: 999;
+}
+// 搜索建议列表
+.sugg-list{
+  padding: 0 6px;
+  .sugg-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    font-size: 14px;
+  }
+  .goods-name{
+    // 单行文本
+    white-space: nowrap;
+    // 溢出隐藏
+    overflow: hidden;
+    // 展示...
+    text-overflow: ellipsis;
+  }
 }
 </style>
