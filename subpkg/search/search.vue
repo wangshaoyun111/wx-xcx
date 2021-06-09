@@ -20,7 +20,7 @@
       </view>
       <!-- 搜索历史结果 -->
       <view class="history-result">
-        <uni-tag class="uni-tag" v-for="(item,index) in historyList" :key="index" :text="item"></uni-tag>
+        <uni-tag class="uni-tag" v-for="(item,index) in historys" :key="index" :text="item"></uni-tag>
       </view>
     </view>
   </view>
@@ -70,7 +70,15 @@
       
       // 数据存储到historyList中方法
       saveHistoryList(){
-        this.historyList.unshift(this.keyVal)
+        this.historyList.push(this.keyVal)
+      }
+    },
+    computed:{
+      // 反转用户搜索历史搜索排序
+      historys(){
+        // 因为数组时引用类型，不能直接调用reveres方法
+        // 可能会对原数组排序有影响
+        return [...this.historyList].reverse()
       }
     }
   }
