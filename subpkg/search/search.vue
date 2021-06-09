@@ -36,6 +36,10 @@
         historyList: [] // 搜索历史列表
       };
     },
+    onLoad() {
+      // 取出本地存储搜索历史数据
+      this.historyList = JSON.parse(uni.getStorageSync('kw'))
+    },
     methods: {
       // 跳转到商品详情
       goToDetail(id) {
@@ -76,6 +80,8 @@
         // set.delete(this.keyVal)
         // set.add(this.keyVal)
         this.historyList = Array.from(set)
+        // 调用  uni.setStorageSync 方法将搜索历史存储到本地
+        uni.setStorageSync('kw',JSON.stringify(this.historyList))
       }
     },
     computed:{
