@@ -16,7 +16,7 @@
       <!-- 搜索历史标题 -->
       <view class="history-title">
         <text>搜索历史</text>
-        <uni-icons type="trash" size="16"></uni-icons>
+        <uni-icons type="trash" size="16" @click="clearHistory"></uni-icons>
       </view>
       <!-- 搜索历史结果 -->
       <view class="history-result">
@@ -38,9 +38,14 @@
     },
     onLoad() {
       // 取出本地存储搜索历史数据
-      this.historyList = JSON.parse(uni.getStorageSync('kw'))
+      this.historyList = JSON.parse(uni.getStorageSync('kw')) || []
     },
     methods: {
+      // 删除本地存储数据方法
+      clearHistory(){
+        this.historyList = []
+        uni.setStorageSync('kw',[])
+      },
       // 跳转到商品详情
       goToDetail(id) {
         uni.navigateTo({
@@ -131,13 +136,13 @@
     line-height: 40px;
     font-size: 14px;
     border-bottom: 1px solid #efefef;
-    padding: 0 5px;
+    padding: 5px;
   }
 
   .history-result {
     display: flex;
     flex-wrap: warp;
-    padding: 0 5px;
+    padding: 5px;
   }
 
   .uni-tag {
