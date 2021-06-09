@@ -33,7 +33,7 @@
         timerId: null, // 防抖变量
         keyVal: '', // 用户搜索关键字
         searchResart: [], // 用户搜索建议列表
-        historyList: ['11', '22', '33'] // 搜索历史列表
+        historyList: [] // 搜索历史列表
       };
     },
     methods: {
@@ -60,13 +60,17 @@
           this.searchResart = []
           return
         }
-        const {
-          data: res
-        } = await uni.$http.get('/api/public/v1/goods/qsearch', {
-          query: this.keyVal
-        })
+        
+        const {data: res} = await uni.$http.get('/api/public/v1/goods/qsearch', {query: this.keyVal})
         if (res.meta.status !== 200) return uni.$showTost()
         this.searchResart = res.message
+        // 调用将数据存储到historyList中
+        this.saveHistoryList()
+      },
+      
+      // 数据存储到historyList中方法
+      saveHistoryList(){
+        this.historyList.unshift(this.keyVal)
       }
     }
   }
@@ -108,11 +112,13 @@
     line-height: 40px;
     font-size: 14px;
     border-bottom: 1px solid #efefef;
+    padding: 0 5px;
   }
 
   .history-result {
     display: flex;
     flex-wrap: warp;
+    padding: 0 5px;
   }
 
   .uni-tag {
