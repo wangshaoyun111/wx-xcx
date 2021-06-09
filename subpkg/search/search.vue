@@ -71,6 +71,11 @@
       // 数据存储到historyList中方法
       saveHistoryList(){
         this.historyList.push(this.keyVal)
+        // 使用Set数据结构 给数组去重
+        const set = new Set(this.historyList)
+        // set.delete(this.keyVal)
+        // set.add(this.keyVal)
+        this.historyList = Array.from(set)
       }
     },
     computed:{
