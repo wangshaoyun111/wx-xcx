@@ -49,11 +49,14 @@
           url:'/subpkg/goods_list/goods_list?query=' + item
         })
       },
+      // 用户点击回车调用
       gotoGoodsList1(e){
         if(e.value.trim().length === 0) return
         uni.navigateTo({
           url:'/subpkg/goods_list/goods_list?query=' + e.value
         })
+        // 调用将数据存储到historyList中
+        this.saveHistoryList()
       },
       // 删除本地存储数据方法
       clearHistory(){
@@ -65,6 +68,8 @@
         uni.navigateTo({
           url: "/subpkg/goods_detail/goods_detail?goods_id=" + id
         })
+        // 调用将数据存储到historyList中
+        this.saveHistoryList()
       },
       // 获取用户关键字方法
       inputHandle(e) {
@@ -87,8 +92,6 @@
         const {data: res} = await uni.$http.get('/api/public/v1/goods/qsearch', {query: this.keyVal})
         if (res.meta.status !== 200) return uni.$showTost()
         this.searchResart = res.message
-        // 调用将数据存储到historyList中
-        this.saveHistoryList()
       },
       
       // 数据存储到historyList中方法
