@@ -1,9 +1,9 @@
 <template>
 	<view>
 		<view class="goods-list">
-		  <block v-for="(item,index) in goodsList" :key="index">
+		  <view @click="gotoGoodsDetail(item)" v-for="(item,index) in goodsList" :key="index">
         <my-goods :goods="item"></my-goods>
-      </block>
+      </view>
 		</view>
 	</view>
 </template>
@@ -32,8 +32,14 @@
       this.getGoodsList()
     },
     methods:{
+      // 调整商品详情
+      gotoGoodsDetail(item){
+        uni.navigateTo({
+          url:'/subpkg/goods_detail/goods_detail?goods_id=' + item.goods_id
+        })
+      },
       // 请求商品列表的方法
-      async getGoodsList(){
+      async getGoodsList(cb){
         // 代表正在请求中
         this.isLoading = true
         const{data:res} = await uni.$http.get('/api/public/v1/goods/search',this.queryObj)
@@ -41,6 +47,7 @@
         this.isLoading = false
         this.goodsList = [...this.goodsList,...res.message.goods]
         this.total = res.message.total
+        cb&cb()
       }
     },
     // 上拉加载更多数据
@@ -58,7 +65,9 @@
       this.total = 0
       this.goodsList = []
       this.isLoading = false
-      this.getGoodsList()
+      this.getGoodsList(()=>{
+        uni.stopPullDownRefresh()
+      })
     }
 	}
 </script>
