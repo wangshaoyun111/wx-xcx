@@ -11,13 +11,12 @@
       </scroll-view>
       <!-- 右侧二级三级分类 -->
       <scroll-view scroll-y class="right-scroll-view" :style="{height: wh + 'px'}" :scroll-top="scrollTop">
-        
         <view class="cate-level2" v-for="(item,index) in cateLevel2" :key='index'>
           <!-- 渲染二级分类 -->
           <view class="cate-level2-title">/{{item.cat_name}}/</view>
           <!-- 渲染三级分类 -->
           <view class="cate-level3-list">
-            <view class="cate-level3-item" v-for="(value,idx) in item.children" :key='idx'>
+            <view class="cate-level3-item" v-for="(value,idx) in item.children" :key='idx' @click="gotoGoodsList(value.cat_id)">
               <image :src="value.cat_icon" mode=""></image>
               <text>{{value.cat_name}}</text>
             </view>
@@ -47,12 +46,19 @@
       this.getCateList()
     },
     methods:{
+      // 跳转到商品列表页面
+      gotoGoodsList(item){
+        console.log(123);
+        uni.navigateTo({
+          url:'/subpkg/goods_list/goods_list?cid=' + item
+        })
+      },
       gotoSearch(){
         uni.navigateTo({
           url: '/subpkg/search/search'
         })
       },
-      // 丁一获取分类数据方法
+      // 获取分类数据方法
       async getCateList(){
         const {data:res} = await uni.$http.get('/api/public/v1/categories')
         if(res.meta.status !== 200) return uni.$showTost()

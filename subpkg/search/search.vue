@@ -2,7 +2,7 @@
   <view>
     <!-- 搜索按钮区域 -->
     <view class="search-box">
-      <uni-search-bar @input="inputHandle" radius="100" cancelButton="none"></uni-search-bar>
+      <uni-search-bar @confirm="gotoGoodsList1()" @input="inputHandle" radius="100" cancelButton="none"></uni-search-bar>
     </view>
     <!-- 搜索建议区域 -->
     <view class="sugg-list" v-if="searchResart.length !== 0">
@@ -20,7 +20,7 @@
       </view>
       <!-- 搜索历史结果 -->
       <view class="history-result">
-        <uni-tag class="uni-tag" v-for="(item,index) in historys" :key="index" :text="item"></uni-tag>
+        <uni-tag class="uni-tag" v-for="(item,index) in historys" :key="index" :text="item" @click="gotoGoodsList(item)"></uni-tag>
       </view>
     </view>
   </view>
@@ -38,9 +38,23 @@
     },
     onLoad() {
       // 取出本地存储搜索历史数据
-      this.historyList = JSON.parse(uni.getStorageSync('kw')) || []
+      if(uni.getStorageSync('kw').length !== 0) {
+        this.historyList = JSON.parse(uni.getStorageSync('kw'))
+      }
     },
     methods: {
+      // 跳转到商品列表页面
+      gotoGoodsList(item){
+        uni.navigateTo({
+          url:'/subpkg/goods_list/goods_list?query=' + item
+        })
+      },
+      gotoGoodsList1(e){
+        if(e.value.trim().length === 0) return
+        uni.navigateTo({
+          url:'/subpkg/goods_list/goods_list?query=' + e.value
+        })
+      },
       // 删除本地存储数据方法
       clearHistory(){
         this.historyList = []

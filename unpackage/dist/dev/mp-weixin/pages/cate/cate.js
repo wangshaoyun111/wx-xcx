@@ -182,7 +182,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 {
   data: function data() {
@@ -202,12 +201,19 @@ var _default =
     this.getCateList();
   },
   methods: {
+    // 跳转到商品列表页面
+    gotoGoodsList: function gotoGoodsList(item) {
+      console.log(123);
+      uni.navigateTo({
+        url: '/subpkg/goods_list/goods_list?cid=' + item });
+
+    },
     gotoSearch: function gotoSearch() {
       uni.navigateTo({
         url: '/subpkg/search/search' });
 
     },
-    // 丁一获取分类数据方法
+    // 获取分类数据方法
     getCateList: function getCateList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   uni.$http.get('/api/public/v1/categories'));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;if (!(
                 res.meta.status !== 200)) {_context.next = 6;break;}return _context.abrupt("return", uni.$showTost());case 6:
