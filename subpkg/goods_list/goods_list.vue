@@ -20,8 +20,20 @@
 			};
 		},
     onLoad(options) {
-      this.queryObj.query = options.query
-      this.queryObj.cid = options.cid
+      // 接收其他页面发送参数
+      this.queryObj.query = options.query || ''
+      this.queryObj.cid = options.cid || ''
+      // 调用商品列表方法
+      this.getGoodsList()
+    },
+    methods:{
+      // 请求商品列表的方法
+      async getGoodsList(){
+        const{data:res} = await uni.$http.get('/api/public/v1/goods/search',this.queryObj)
+        if(res.meta.status !== 200) return uni.$showTost()
+        this.goodsList = res.message.goods
+        this.total = res.message.total
+      }
     }
 	}
 </script>
