@@ -21,8 +21,6 @@
 				},
         total:0, // 商品列表总条数
         goodsList:[], // 商品列表数据
-        // 默认的空图片
-        defaultPic: 'https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png'
 			};
 		},
     onLoad(options) {
@@ -37,9 +35,14 @@
       async getGoodsList(){
         const{data:res} = await uni.$http.get('/api/public/v1/goods/search',this.queryObj)
         if(res.meta.status !== 200) return uni.$showTost()
-        this.goodsList = res.message.goods
+        this.goodsList = [...this.goodsList,...res.message.goods]
         this.total = res.message.total
       }
+    },
+    onReachBottom() {
+      // 页码加1
+      this.queryObj.pagenum += 1
+      this.getGoodsList()
     }
 	}
 </script>
