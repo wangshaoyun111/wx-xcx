@@ -43,12 +43,21 @@
         this.total = res.message.total
       }
     },
+    // 上拉加载更多数据
     onReachBottom() {
       // 判断数据是否加载完毕
       if(this.queryObj.pagenum * this.queryObj.pagesize >= this.total) return uni.$showTost('数据加载完毕')
       if(this.isLoading) return
       // 页码加1
       this.queryObj.pagenum += 1
+      this.getGoodsList()
+    },
+    // 下拉刷新数据
+    onPullDownRefresh() {
+      this.queryObj.pagenum = 1
+      this.total = 0
+      this.goodsList = []
+      this.isLoading = false
       this.getGoodsList()
     }
 	}
