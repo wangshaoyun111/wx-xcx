@@ -8,7 +8,7 @@
     <view class="right-goods-item">
       <view class="goods-name">{{goods.goods_name}}</view>
       <view class="goods-info">
-        <view class="goods-price">￥ {{goods.goods_price}}</view>
+        <view class="goods-price">￥ {{goods.goods_price | toFiexed}}</view>
       </view>
     </view>
   </view>
@@ -28,6 +28,12 @@
         // 默认的空图片
         defaultPic: 'https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png'
       };
+    },
+    filters:{
+      toFiexed(num) {
+        // 将价格保留两位小数点
+        return Number(num).toFixed(2)
+      }
     }
   }
 </script>
@@ -51,7 +57,7 @@
       justify-content: space-between;
       padding: 5px 0;
       .goods-name{
-        font-size: 14px;
+        font-size: 13px;
       }
       .goods-info{
         .goods-price{
