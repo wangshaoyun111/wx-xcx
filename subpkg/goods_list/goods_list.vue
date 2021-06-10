@@ -2,19 +2,7 @@
 	<view>
 		<view class="goods-list">
 		  <block v-for="(item,index) in goodsList" :key="index">
-        <view class="goods-item">
-          <!-- 左侧商品图片 -->
-          <view class="left-goods-item">
-            <image :src="item.goods_small_logo || defaultPic" mode=""></image>
-          </view>
-          <!-- 右侧商品详情区域 -->
-          <view class="right-goods-item">
-            <view class="goods-name">{{item.goods_name}}</view>
-            <view class="goods-info">
-              <view class="goods-price">￥ {{item.goods_price}}</view>
-            </view>
-          </view>
-        </view>
+        <my-goods :goods="item"></my-goods>
       </block>
 		</view>
 	</view>
@@ -57,34 +45,5 @@
 </script>
 
 <style lang="scss">
-.goods-list{
-  .goods-item{
-    display: flex;
-    border-buttom: 1px solid #efefef;
-    padding: 10px 5px;
-    .left-goods-item{
-      margin-right: 6px;
-      image{
-        width: 100px;
-        height: 100px;
-        display: block;
-      }
-    }
-    .right-goods-item{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      .goods-name{
-        font-size: 14px;
-      }
-      .goods-info{
-        .goods-price{
-          font-size: 16px;
-          color: #c00000;
-        }
-      }
-      
-    }
-  }
-}
+
 </style>

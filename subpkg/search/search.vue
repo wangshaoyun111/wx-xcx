@@ -68,8 +68,6 @@
         uni.navigateTo({
           url: "/subpkg/goods_detail/goods_detail?goods_id=" + id
         })
-        // 调用将数据存储到historyList中
-        this.saveHistoryList()
       },
       // 获取用户关键字方法
       inputHandle(e) {
