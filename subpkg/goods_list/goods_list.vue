@@ -47,7 +47,7 @@
         this.isLoading = false
         this.goodsList = [...this.goodsList,...res.message.goods]
         this.total = res.message.total
-        cb&cb()
+        cb&&cb()
       }
     },
     // 上拉加载更多数据
@@ -65,9 +65,7 @@
       this.total = 0
       this.goodsList = []
       this.isLoading = false
-      this.getGoodsList(()=>{
-        uni.stopPullDownRefresh()
-      })
+      this.getGoodsList(()=> uni.stopPullDownRefresh())
     }
 	}
 </script>
