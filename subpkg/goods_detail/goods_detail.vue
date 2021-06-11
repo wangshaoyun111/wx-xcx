@@ -21,6 +21,9 @@
       <!-- 快递 -->
       <view class="express">快递:免运费</view>
     </view>
+    <!-- 商品详情渲染 -->
+    <!-- nodes节点需要渲染的字符串 -->
+    <rich-text :nodes="goods_info.goods_introduce"></rich-text>
 	</view>
 </template>
 
@@ -41,6 +44,9 @@
       async getGoodsDetail(goodsId){
         const {data:res} = await uni.$http.get('/api/public/v1/goods/detail', { goods_id:goodsId })
         if(res.meta.status !==200) return uni.$showTost()
+        // 处理 图片 空白样式间隙问题
+        // 处理.webp 这个图片格式在ios上无法运行，替换成jpg
+        res.message.goods_introduce = res.message.goods_introduce.replace(/<img /g,'<img style="display:block;"').replace(/webp/g,'jpg')
         this.goods_info = res.message
       }
     }
