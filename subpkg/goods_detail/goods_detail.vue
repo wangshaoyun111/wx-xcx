@@ -7,7 +7,7 @@
       </swiper-item>
     </swiper>
     <!-- 渲染商品信息 -->
-    <view class="goods-info-container">
+    <view class="goods-info-container" v-if="goods_info.goods_name">
       <!-- 价格 -->
       <view class="price">￥{{goods_info.goods_price}}</view>
       <!-- ，名称和收藏 -->
