@@ -20,10 +20,17 @@
       </view>
       <!-- 快递 -->
       <view class="express">快递:免运费</view>
+      <rich-text :nodes="goods_info.goods_introduce"></rich-text>
     </view>
     <!-- 商品详情渲染 -->
     <!-- nodes节点需要渲染的字符串 -->
-    <rich-text :nodes="goods_info.goods_introduce"></rich-text>
+    <!-- 渲染商品导航区域 -->
+    <view class="goods-nav">
+      <!-- options控制左侧按钮控制项 -->
+      <!-- buttonGroup控制右侧按钮的 -->
+      <!-- fill控制方形还是圆角 -->
+      <uni-goods-nav fill="true"></uni-goods-nav>
+    </view>
 	</view>
 </template>
 
@@ -31,7 +38,9 @@
 	export default {
 		data() {
 			return {
-				goods_info:{} // 商品详情数据
+				goods_info:{}, // 商品详情数据
+        options:[], // 
+        buttonGroup:[]
 			};
 		},
     onLoad(options) {
@@ -65,7 +74,7 @@ swiper{
 }
 // 商品详情
 .goods-info-container{
-  padding: 0 10px;
+  padding: 10px 10px 50px;
   .price{
     color: #c00000;
     font-size: 18px;
@@ -94,5 +103,11 @@ swiper{
     font-size: 12px;
     margin: 10px 0;
   }
+}
+.goods-nav{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 </style>
