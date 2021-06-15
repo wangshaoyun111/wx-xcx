@@ -29,7 +29,7 @@
       <!-- options控制左侧按钮控制项 -->
       <!-- buttonGroup控制右侧按钮的 -->
       <!-- fill控制方形还是圆角 -->
-      <uni-goods-nav fill="true"></uni-goods-nav>
+      <uni-goods-nav fill="true" @click="gotoCart"></uni-goods-nav>
     </view>
 	</view>
 </template>
@@ -49,6 +49,13 @@
       this.getGoodsDetail(goodsId)
     },
     methods:{
+      gotoCart(e){
+        if(e.content.text === '购物车'){
+          uni.switchTab({
+            url:'/pages/cart/cart'
+          })
+        }
+      },
       // 获取数据详情方法
       async getGoodsDetail(goodsId){
         const {data:res} = await uni.$http.get('/api/public/v1/goods/detail', { goods_id:goodsId })
