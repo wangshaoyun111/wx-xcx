@@ -2177,14 +2177,14 @@ var $http = new Request();exports.$http = $http;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 创建cart Vuex模块
 var _default = {
+  // 为cart模块开启命名空间
+  namespaced: true,
   state: function state() {return {
       cart: [], // 购物车商品数据
       // 操作state的核心模块
       mutations: {},
       // 对state数据处理的核心模块
-      getters: {},
-      // 为cart模块开启命名空间
-      namespaceds: true };} };exports.default = _default;
+      getters: {} };} };exports.default = _default;
 
 /***/ }),
 

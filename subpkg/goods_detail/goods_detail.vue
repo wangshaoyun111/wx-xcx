@@ -19,7 +19,7 @@
         </view>
       </view>
       <!-- 快递 -->
-      <view class="express">快递:免运费</view>
+      <view class="express">快递:免运费---{{cart.length}}</view>
       <rich-text :nodes="goods_info.goods_introduce"></rich-text>
     </view>
     <!-- 商品详情渲染 -->
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -65,6 +66,9 @@
         res.message.goods_introduce = res.message.goods_introduce.replace(/<img /g,'<img style="display:block;"').replace(/webp/g,'jpg')
         this.goods_info = res.message
       }
+    },
+    computed:{
+      ...mapState('my_cart',['cart'])
     }
 	}
 </script>
