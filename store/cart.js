@@ -20,5 +20,13 @@ export default {
     }
   },
   // 对state数据处理的核心模块
-  getters:{}
+  getters:{
+    total(state) {
+      let allCount = 0
+      // 循环遍历数组，实现总和
+      state.cart.forEach(item => allCount += item.goods_count)
+      return allCount
+    }
+  }
+  
 }

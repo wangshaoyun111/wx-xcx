@@ -3355,7 +3355,13 @@ var _default = {
     } },
 
   // 对state数据处理的核心模块
-  getters: {} };exports.default = _default;
+  getters: {
+    total: function total(state) {
+      var allCount = 0;
+      // 循环遍历数组，实现总和
+      state.cart.forEach(function (item) {return allCount += item.goods_count;});
+      return allCount;
+    } } };exports.default = _default;
 
 /***/ }),
 

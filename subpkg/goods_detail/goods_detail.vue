@@ -19,7 +19,7 @@
         </view>
       </view>
       <!-- 快递 -->
-      <view class="express">快递:免运费---{{cart.length}}</view>
+      <view class="express">快递:免运费</view>
       <rich-text :nodes="goods_info.goods_introduce"></rich-text>
     </view>
     <!-- 商品详情渲染 -->
@@ -29,7 +29,7 @@
       <!-- options控制左侧按钮控制项 -->
       <!-- buttonGroup控制右侧按钮的 -->
       <!-- fill控制方形还是圆角 -->
-      <uni-goods-nav fill="true" @click="gotoCart" @buttonClick="buttonClick"></uni-goods-nav>
+      <uni-goods-nav fill="true" :options="options" @click="gotoCart" @buttonClick="buttonClick"></uni-goods-nav>
     </view>
   </view>
 </template>
@@ -37,13 +37,21 @@
 <script>
   import {
     mapState,
-    mapMutations 
+    mapMutations,
+    mapGetters 
   } from 'vuex'
   export default {
     data() {
       return {
         goods_info: {}, // 商品详情数据
-        options: [], // 
+        options: [{
+          icon: 'shop',
+          text: '店铺'
+        }, {
+          icon: 'cart',
+          text: '购物车',
+          info: ''
+        }],
         buttonGroup: []
       };
     },
@@ -94,7 +102,16 @@
       }
     },
     computed: {
-      ...mapState('my_cart', ['cart'])
+      ...mapState('my_cart', ['cart']),
+      ...mapGetters ('my_cart', ['total'])
+    },
+    watch: {
+      total(newTotal) {
+        const findResult = this.options.find(item => item.text === '购物车')
+        if(findResult) {
+          findResult.info = newTotal
+        }
+      }
     }
   }
 </script>
