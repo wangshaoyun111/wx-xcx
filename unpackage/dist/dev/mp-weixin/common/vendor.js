@@ -3333,12 +3333,12 @@ var index = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 创建cart Vuex模块
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 创建cart Vuex模块
 var _default = {
   // 为cart模块开启命名空间
   namespaced: true,
   state: function state() {return {
-      cart: [] // 购物车商品数据
+      cart: JSON.parse(uni.getStorageSync('cart') || '[]') // 购物车商品数据
     };},
   // 操作state的核心模块
   mutations: {
@@ -3352,16 +3352,24 @@ var _default = {
       } else {
         findResult.goods_count++;
       }
+      // 使用commit方法调用my_cart这个命名空间下的saveToStorage方法
+      this.commit('my_cart/saveToStorage');
+    },
+    // 将购物车商品数据存储到本地方法
+    saveToStorage: function saveToStorage(state) {
+      uni.setStorageSync('cart', JSON.stringify(state.cart));
     } },
 
   // 对state数据处理的核心模块
   getters: {
     total: function total(state) {
+      console.log(state.cart);
       var allCount = 0;
       // 循环遍历数组，实现总和
       state.cart.forEach(function (item) {return allCount += item.goods_count;});
       return allCount;
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

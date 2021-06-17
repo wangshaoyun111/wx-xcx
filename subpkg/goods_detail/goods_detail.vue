@@ -38,7 +38,7 @@
   import {
     mapState,
     mapMutations,
-    mapGetters 
+    mapGetters
   } from 'vuex'
   export default {
     data() {
@@ -103,14 +103,20 @@
     },
     computed: {
       ...mapState('my_cart', ['cart']),
-      ...mapGetters ('my_cart', ['total'])
+      ...mapGetters('my_cart', ['total'])
     },
     watch: {
-      total(newTotal) {
-        const findResult = this.options.find(item => item.text === '购物车')
-        if(findResult) {
-          findResult.info = newTotal
-        }
+      // 进入页面需要直接使用监听器，需要添加immediate属性
+      // 需要监听的数据写成对象方式，方法名固定为handler，在里面写方法
+      total:{
+        handler(newTotal){
+          const findResult = this.options.find(item => item.text === '购物车')
+          if (findResult) {
+            findResult.info = newTotal
+          }
+        },
+        // immediate 属性用来声明此侦听器，是否在页面初次加载完毕后立即调用
+        immediate: true
       }
     }
   }
