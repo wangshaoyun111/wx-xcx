@@ -2167,27 +2167,6 @@ var $http = new Request();exports.$http = $http;
 
 /***/ }),
 
-/***/ 128:
-/*!****************************************************************!*\
-  !*** C:/Users/18611/Desktop/uni-app/firstuniapp/store/cart.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 创建cart Vuex模块
-var _default = {
-  // 为cart模块开启命名空间
-  namespaced: true,
-  state: function state() {return {
-      cart: [], // 购物车商品数据
-      // 操作state的核心模块
-      mutations: {},
-      // 对state数据处理的核心模块
-      getters: {} };} };exports.default = _default;
-
-/***/ }),
-
 /***/ 13:
 /*!******************************************************************!*\
   !*** C:/Users/18611/Desktop/uni-app/firstuniapp/common/utils.js ***!
@@ -2219,7 +2198,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 15));
 
-var _cart = _interopRequireDefault(__webpack_require__(/*! ./cart.js */ 128));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 初始化store对象
+var _cart = _interopRequireDefault(__webpack_require__(/*! ./cart.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 初始化store对象
 // 导入cart的store模块
 // 将vuex挂载到vue上
 _vue.default.use(_vuex.default); // 创建实例store对象
@@ -3343,6 +3322,40 @@ var index = {
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3)))
+
+/***/ }),
+
+/***/ 16:
+/*!****************************************************************!*\
+  !*** C:/Users/18611/Desktop/uni-app/firstuniapp/store/cart.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 创建cart Vuex模块
+var _default = {
+  // 为cart模块开启命名空间
+  namespaced: true,
+  state: function state() {return {
+      cart: [] // 购物车商品数据
+    };},
+  // 操作state的核心模块
+  mutations: {
+    // 添加商品信息到store中
+    addToCart: function addToCart(state, goods) {
+      // 判断cart是否存在同名商品，存在同名商品购买数量 + 1
+      // 不存在同名商品直接添加到cart中
+      var findResult = state.cart.find(function (item) {return item.goods_id === goods.goods_id;});
+      if (!findResult) {
+        state.cart.push(goods);
+      } else {
+        findResult.goods_count++;
+      }
+    } },
+
+  // 对state数据处理的核心模块
+  getters: {} };exports.default = _default;
 
 /***/ }),
 
@@ -9394,18 +9407,18 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 23);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 24);
 
 /***/ }),
 
-/***/ 23:
+/***/ 24:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -9436,7 +9449,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 24);
+module.exports = __webpack_require__(/*! ./runtime */ 25);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -9453,7 +9466,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 24:
+/***/ 25:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -10227,7 +10240,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 96:
+/***/ 97:
 /*!******************************************************************************************************!*\
   !*** C:/Users/18611/Desktop/uni-app/firstuniapp/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \******************************************************************************************************/

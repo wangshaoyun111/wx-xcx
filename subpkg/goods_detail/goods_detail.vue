@@ -1,9 +1,9 @@
 <template>
-	<view>
-		<!-- 轮播图区域 -->
+  <view>
+    <!-- 轮播图区域 -->
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
       <swiper-item v-for="(item,index) in goods_info.pics" :key="index">
-        <image :src="item.pics_big" ></image>
+        <image :src="item.pics_big"></image>
       </swiper-item>
     </swiper>
     <!-- 渲染商品信息 -->
@@ -29,96 +29,129 @@
       <!-- options控制左侧按钮控制项 -->
       <!-- buttonGroup控制右侧按钮的 -->
       <!-- fill控制方形还是圆角 -->
-      <uni-goods-nav fill="true" @click="gotoCart"></uni-goods-nav>
+      <uni-goods-nav fill="true" @click="gotoCart" @buttonClick="buttonClick"></uni-goods-nav>
     </view>
-	</view>
+  </view>
 </template>
 
 <script>
-  import {mapState} from 'vuex'
-	export default {
-		data() {
-			return {
-				goods_info:{}, // 商品详情数据
-        options:[], // 
-        buttonGroup:[]
-			};
-		},
+  import {
+    mapState,
+    mapMutations 
+  } from 'vuex'
+  export default {
+    data() {
+      return {
+        goods_info: {}, // 商品详情数据
+        options: [], // 
+        buttonGroup: []
+      };
+    },
     onLoad(options) {
       const goodsId = options.goods_id
       // 调用商品详情数据方法
       this.getGoodsDetail(goodsId)
     },
-    methods:{
-      gotoCart(e){
-        if(e.content.text === '购物车'){
+    methods: {
+      // 将my_cart中的修改state方法映射进来
+      ...mapMutations('my_cart', ['addToCart']),
+      // 点击加入购物车
+      buttonClick(e) {
+        if (e.content.text === '加入购物车') {
+          // 格式化需要添加的信息
+          const goods = {
+            goods_id: this.goods_info.goods_id, // 商品的Id
+            goods_name: this.goods_info.goods_name, // 商品的名称
+            goods_price: this.goods_info.goods_price, // 商品的价格
+            goods_count: 1, // 商品的数量
+            goods_small_logo: this.goods_info.goods_small_logo, // 商品的图片
+            goods_state: true // 商品的勾选状态
+          }
+          // 调用mutations方法，在state中添加数据
+          this.addToCart(goods)
+        }
+      },
+      gotoCart(e) {
+        if (e.content.text === '购物车') {
           uni.switchTab({
-            url:'/pages/cart/cart'
+            url: '/pages/cart/cart'
           })
         }
       },
       // 获取数据详情方法
-      async getGoodsDetail(goodsId){
-        const {data:res} = await uni.$http.get('/api/public/v1/goods/detail', { goods_id:goodsId })
-        if(res.meta.status !==200) return uni.$showTost()
+      async getGoodsDetail(goodsId) {
+        const {
+          data: res
+        } = await uni.$http.get('/api/public/v1/goods/detail', {
+          goods_id: goodsId
+        })
+        if (res.meta.status !== 200) return uni.$showTost()
         // 处理 图片 空白样式间隙问题
         // 处理.webp 这个图片格式在ios上无法运行，替换成jpg
-        res.message.goods_introduce = res.message.goods_introduce.replace(/<img /g,'<img style="display:block;"').replace(/webp/g,'jpg')
+        res.message.goods_introduce = res.message.goods_introduce.replace(/<img /g, '<img style="display:block;"')
+          .replace(/webp/g, 'jpg')
         this.goods_info = res.message
       }
     },
-    computed:{
-      ...mapState('my_cart',['cart'])
+    computed: {
+      ...mapState('my_cart', ['cart'])
     }
-	}
+  }
 </script>
 
 <style lang="scss">
   // 轮播图
-swiper{
-  height: 750rpx;
-  
-  image{
-    width: 100%;
-    height: 100%;
-  }
-}
-// 商品详情
-.goods-info-container{
-  padding: 10px 10px 50px;
-  .price{
-    color: #c00000;
-    font-size: 18px;
-    margin: 10px 0;
-  }
-  .goods-info{
-    display: flex;
-    justify-content: space-between;
-    .goods-name{
-      font-size: 13px;
-      margin-right: 10px;
+  swiper {
+    height: 750rpx;
+
+    image {
+      width: 100%;
+      height: 100%;
     }
-    .like{
+  }
+
+  // 商品详情
+  .goods-info-container {
+    padding: 10px 10px 50px;
+
+    .price {
+      color: #c00000;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .goods-info {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border-left: 1px solid #efefef;
+      justify-content: space-between;
+
+      .goods-name {
+        font-size: 13px;
+        margin-right: 10px;
+      }
+
+      .like {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-left: 1px solid #efefef;
+        color: gray;
+        width: 120px;
+        font-size: 12px;
+      }
+    }
+
+    .express {
       color: gray;
-      width: 120px;
       font-size: 12px;
+      margin: 10px 0;
     }
   }
-  .express{
-    color: gray;
-    font-size: 12px;
-    margin: 10px 0;
+
+  .goods-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
   }
-}
-.goods-nav{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
 </style>
