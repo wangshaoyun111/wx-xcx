@@ -9,6 +9,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   modules:{
     // 将cart的store模块挂在到 moudles上
+    // 使用my_cart接收模块，想访问cart.js中成员需要调整为my_cart/cart
     my_cart:moudleCart
   }
 })

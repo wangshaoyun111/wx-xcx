@@ -126,6 +126,9 @@ try {
   components = {
     uniIcons: function() {
       return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 92))
+    },
+    myGoods: function() {
+      return __webpack_require__.e(/*! import() | components/my-goods/my-goods */ "components/my-goods/my-goods").then(__webpack_require__.bind(null, /*! @/components/my-goods/my-goods.vue */ 107))
     }
   }
 } catch (e) {
@@ -194,19 +197,24 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _tabbarBadge = _interopRequireDefault(__webpack_require__(/*! ../../mixins/tabbar-badge.js */ 141));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// 导入封装的设置徽章的mixins文件
-var _default = { // 将tabBarBadge里面成员映射成当前页面中方法
-  mixins: [_tabbarBadge.default], data: function data() {return {};} };exports.default = _default;
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 15);
+
+var _tabbarBadge = _interopRequireDefault(__webpack_require__(/*! ../../mixins/tabbar-badge.js */ 141));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+{
+  // 将tabBarBadge里面成员映射成当前页面中方法
+  mixins: [_tabbarBadge.default],
+  data: function data() {
+    return {};
+
+
+  },
+  computed: _objectSpread({},
+  (0, _vuex.mapState)('my_cart', ['cart'])) };exports.default = _default;
 
 /***/ })
 

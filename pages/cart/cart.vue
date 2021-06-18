@@ -5,10 +5,17 @@
       <uni-icons type="shop" size="18"></uni-icons>
       <text class="cart-title-text">购物车</text>
     </view>
+    <!-- 渲染商品列表区域 -->
+    <view class="cart-list">
+      <block v-for="(item,index) in cart" :key="index">
+        <my-goods :goods="item"></my-goods>
+      </block>
+    </view>
 	</view>
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   // 导入封装的设置徽章的mixins文件
   import tabBarBadge from '../../mixins/tabbar-badge.js'
 	export default {
@@ -19,6 +26,9 @@
 				
 			};
 		},
+    computed:{
+      ...mapState('my_cart',['cart'])
+    }
   }
 </script>
 

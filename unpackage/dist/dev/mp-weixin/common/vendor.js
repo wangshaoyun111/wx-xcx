@@ -2205,6 +2205,7 @@ _vue.default.use(_vuex.default); // 创建实例store对象
 var store = new _vuex.default.Store({
   modules: {
     // 将cart的store模块挂在到 moudles上
+    // 使用my_cart接收模块，想访问cart.js中成员需要调整为my_cart/cart
     my_cart: _cart.default } });var _default =
 
 
