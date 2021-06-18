@@ -2,7 +2,7 @@
   <view class="goods-item">
     <!-- 左侧商品图片 -->
     <view class="left-goods-item">
-      <radio v-if="showRadio" checked color="#C00000" />
+      <radio @click="radioChangeHandler" v-if="showRadio" :checked="goods.goods_state" color="#C00000" />
       <image :src="goods.goods_small_logo || defaultPic" mode=""></image>
     </view>
     <!-- 右侧商品详情区域 -->
@@ -34,6 +34,16 @@
         // 默认的空图片
         defaultPic: 'https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png'
       };
+    },
+    methods:{
+      // 控制radio单选框的点击事件
+      radioChangeHandler(){
+        this.$emit('radia-change',{
+          // 传递两个数据1.id2.商品的勾选状态
+          goods_id:this.goods.goods_id,
+          goods_state:this.goods.goods_state,
+        })
+      }
     },
     filters:{
       toFiexed(num) {

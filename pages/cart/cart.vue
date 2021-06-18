@@ -8,7 +8,7 @@
     <!-- 渲染商品列表区域 -->
     <view class="cart-list">
       <block v-for="(item,index) in cart" :key="index">
-        <my-goods :showRadio="true" :goods="item"></my-goods>
+        <my-goods @radia-change="radioChangeHandler" :showRadio="true" :goods="item"></my-goods>
       </block>
     </view>
 	</view>
@@ -26,6 +26,12 @@
 				
 			};
 		},
+    methods:{
+      // 改变单选框状态
+      radioChangeHandler(e){
+        console.log(e);
+      }
+    },
     computed:{
       ...mapState('my_cart',['cart'])
     }

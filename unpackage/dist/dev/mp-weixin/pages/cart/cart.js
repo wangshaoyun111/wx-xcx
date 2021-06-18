@@ -213,6 +213,12 @@ var _tabbarBadge = _interopRequireDefault(__webpack_require__(/*! ../../mixins/t
 
 
   },
+  methods: {
+    // 改变单选框状态
+    radioChangeHandler: function radioChangeHandler(e) {
+      console.log(e);
+    } },
+
   computed: _objectSpread({},
   (0, _vuex.mapState)('my_cart', ['cart'])) };exports.default = _default;
 
