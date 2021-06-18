@@ -1,6 +1,10 @@
 <template>
 	<view>
-		购物车
+		<!-- 购物车标题 -->
+    <view class="cart-title">
+      <uni-icons type="shop" size="18"></uni-icons>
+      <text class="cart-title-text">购物车</text>
+    </view>
 	</view>
 </template>
 
@@ -19,5 +23,14 @@
 </script>
 
 <style lang="scss">
-
+.cart-title{
+  height:40px ;
+  line-height: 40px;
+  font-size: 14px;
+  padding-left: 6px;
+  border-bottom: 1px solid #efefef;
+  .cart-title-text{
+    margin-left: 10px;
+  }
+}
 </style>
