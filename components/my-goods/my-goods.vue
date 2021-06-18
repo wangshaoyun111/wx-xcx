@@ -2,6 +2,7 @@
   <view class="goods-item">
     <!-- 左侧商品图片 -->
     <view class="left-goods-item">
+      <radio v-if="showRadio" checked color="#C00000" />
       <image :src="goods.goods_small_logo || defaultPic" mode=""></image>
     </view>
     <!-- 右侧商品详情区域 -->
@@ -21,6 +22,11 @@
       goods:{
         type:Object,
         default:{}
+      },
+      // 控制单选的隐藏和展示
+      showRadio:{
+        type:Boolean,
+        default:false
       }
     },
     data() {
@@ -44,6 +50,9 @@
     border-buttom: 1px solid #efefef;
     padding: 10px 5px;
     .left-goods-item{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-right: 6px;
       image{
         width: 100px;

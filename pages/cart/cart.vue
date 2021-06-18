@@ -8,7 +8,7 @@
     <!-- 渲染商品列表区域 -->
     <view class="cart-list">
       <block v-for="(item,index) in cart" :key="index">
-        <my-goods :goods="item"></my-goods>
+        <my-goods :showRadio="true" :goods="item"></my-goods>
       </block>
     </view>
 	</view>
