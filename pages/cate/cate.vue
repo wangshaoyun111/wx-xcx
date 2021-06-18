@@ -28,7 +28,9 @@
 </template>
 
 <script>
+  import tabBarBadge from '../../mixins/tabbar-badge.js'
 	export default {
+    mixins:[tabBarBadge],
 		data() {
 			return {
 				wh:0, // 客用窗口高度

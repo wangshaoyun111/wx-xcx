@@ -5,30 +5,17 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  // 导入封装的设置徽章的mixins文件
+  import tabBarBadge from '../../mixins/tabbar-badge.js'
 	export default {
+    // 将tabBarBadge里面成员映射成当前页面中方法
+    mixins:[tabBarBadge],
 		data() {
 			return {
 				
 			};
 		},
-    onShow() {
-      // 设置徽章的方法
-      this.setBadge()
-    },
-    methods:{
-      // 动态为tabbar设置徽章方法
-      setBadge(){
-        uni.setTabBarBadge({
-          index:2,
-          text:this.total + '' // text要求时字符串类型，需要转换成字符串
-        })
-      }
-    },
-    computed:{
-      ...mapGetters('my_cart',['total'])
-    }
-	}
+  }
 </script>
 
 <style lang="scss">

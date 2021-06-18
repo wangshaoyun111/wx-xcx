@@ -44,7 +44,10 @@
 </template>
 
 <script>
+  // 导入封装的设置徽章的mixins文件
+  import tabBarBadge from '../../mixins/tabbar-badge.js'
 	export default {
+    mixins:[tabBarBadge],
 		data() {
 			return {
 				swiperList:[], // 轮播图数据
