@@ -8,8 +8,11 @@
     <!-- 右侧商品详情区域 -->
     <view class="right-goods-item">
       <view class="goods-name">{{goods.goods_name}}</view>
-      <view class="goods-info">
+      <view class="goods-info-box">
+        <!-- 商品价格 -->
         <view class="goods-price">￥ {{goods.goods_price | toFiexed}}</view>
+        <!-- 商品数量 -->
+        <uni-number-box v-if="showNum" :value="goods.goods_count"></uni-number-box>
       </view>
     </view>
   </view>
@@ -25,6 +28,11 @@
       },
       // 控制单选的隐藏和展示
       showRadio:{
+        type:Boolean,
+        default:false
+      },
+      // 控制数量展示
+      showNum:{
         type:Boolean,
         default:false
       }
@@ -71,6 +79,7 @@
       }
     }
     .right-goods-item{
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -78,12 +87,17 @@
       .goods-name{
         font-size: 13px;
       }
-      .goods-info{
-        .goods-price{
-          font-size: 16px;
-          color: #c00000;
-        }
+      
+      .goods-price{
+        font-size: 16px;
+        color: #c00000;
       }
     }
+  }
+  .goods-info-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
   }
 </style>

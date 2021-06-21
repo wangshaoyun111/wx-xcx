@@ -8,7 +8,7 @@
     <!-- 渲染商品列表区域 -->
     <view class="cart-list">
       <block v-for="(item,index) in cart" :key="index">
-        <my-goods @radia-change="radioChangeHandler" :showRadio="true" :goods="item"></my-goods>
+        <my-goods :show-num="true" @radia-change="radioChangeHandler" :showRadio="true" :goods="item"></my-goods>
       </block>
     </view>
 	</view>
@@ -29,7 +29,8 @@
     methods:{
       // 改变单选框状态
       radioChangeHandler(e){
-        console.log(e);
+        const findResult = this.cart.find(item => item.goods_id === e.goods_id)
+        console.log(findResult);
       }
     },
     computed:{
@@ -42,7 +43,7 @@
 .cart-title{
   height:40px ;
   line-height: 40px;
-  font-size: 14px;
+  font-size: 12px;
   padding-left: 6px;
   border-bottom: 1px solid #efefef;
   .cart-title-text{
