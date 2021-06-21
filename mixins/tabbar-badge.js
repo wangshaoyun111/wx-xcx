@@ -17,5 +17,13 @@ export default {
   },
   computed: {
     ...mapGetters('my_cart', ['total'])
+  },
+  watch: {
+    total(newVal) {
+      uni.setTabBarBadge({
+        index: 2, // 给第几项添加索引
+        text: newVal + '' // text要求时字符串类型，需要转换成字符
+      })
+    }
   }
 }
