@@ -12,7 +12,7 @@
         <!-- 商品价格 -->
         <view class="goods-price">￥ {{goods.goods_price | toFiexed}}</view>
         <!-- 商品数量 -->
-        <uni-number-box v-if="showNum" :value="goods.goods_count"></uni-number-box>
+        <uni-number-box @change="numChangeHandle" v-if="showNum" :value="goods.goods_count"></uni-number-box>
       </view>
     </view>
   </view>
@@ -49,7 +49,14 @@
         this.$emit('radia-change',{
           // 传递两个数据1.id2.商品的勾选状态
           goods_id:this.goods.goods_id,
-          goods_state:this.goods.goods_state,
+          goods_state:!this.goods.goods_state,
+        })
+      },
+      // 控制商品数量的加减数量
+      numChangeHandle(value){
+        this.$emit('num-change',{
+          goods_id:this.goods.goods_id,
+          goods_count:+value //能够将最新的值转换成数值类型
         })
       }
     },

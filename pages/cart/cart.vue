@@ -8,14 +8,14 @@
     <!-- 渲染商品列表区域 -->
     <view class="cart-list">
       <block v-for="(item,index) in cart" :key="index">
-        <my-goods :show-num="true" @radia-change="radioChangeHandler" :showRadio="true" :goods="item"></my-goods>
+        <my-goods @num-change="numChange" :show-num="true" @radia-change="radioChangeHandler" :showRadio="true" :goods="item"></my-goods>
       </block>
     </view>
 	</view>
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapState,mapMutations} from 'vuex'
   // 导入封装的设置徽章的mixins文件
   import tabBarBadge from '../../mixins/tabbar-badge.js'
 	export default {
@@ -27,10 +27,14 @@
 			};
 		},
     methods:{
+      ...mapMutations('my_cart',['updataGoodsStatus','updateGoodsNum']),
+      // 改变购买数量
+      numChange(e){
+        this.updateGoodsNum(e)
+      },
       // 改变单选框状态
       radioChangeHandler(e){
-        const findResult = this.cart.find(item => item.goods_id === e.goods_id)
-        console.log(findResult);
+        this.updataGoodsStatus(e)
       }
     },
     computed:{

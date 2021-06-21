@@ -20,6 +20,22 @@ export default {
       // 使用commit方法调用my_cart这个命名空间下的saveToStorage方法
       this.commit('my_cart/saveToStorage')
     },
+    // 更新商品勾选的方法
+    updataGoodsStatus (state,goods){
+      const findResult = state.cart.find(item => item.goods_id === goods.goods_id)
+      if(findResult) {
+        findResult.goods_state = goods.goods_state
+        this.commit('my_cart/saveToStorage')
+      }
+    },
+    // 更新商品购买数量
+    updateGoodsNum(state,goods){
+      const findResult = state.cart.find(item => item.goods_id === goods.goods_id)
+      if(findResult) {
+        findResult.goods_count = goods.goods_count
+        this.commit('my_cart/saveToStorage')
+      }
+    },
     // 将购物车商品数据存储到本地方法
     saveToStorage(state){
       uni.setStorageSync('cart',JSON.stringify(state.cart))
@@ -28,7 +44,6 @@ export default {
   // 对state数据处理的核心模块
   getters:{
     total(state) {
-      console.log(state.cart);
       let allCount = 0
       // 循环遍历数组，实现总和
       state.cart.forEach(item => allCount += item.goods_count)

@@ -184,12 +184,16 @@ var _tabbarBadge = _interopRequireDefault(__webpack_require__(/*! ../../mixins/t
 
 
   },
-  methods: {
+  methods: _objectSpread(_objectSpread({},
+  (0, _vuex.mapMutations)('my_cart', ['updataGoodsStatus', 'updateGoodsNum'])), {}, {
+    // 改变购买数量
+    numChange: function numChange(e) {
+      this.updateGoodsNum(e);
+    },
     // 改变单选框状态
     radioChangeHandler: function radioChangeHandler(e) {
-      var findResult = this.cart.find(function (item) {return item.goods_id === e.goods_id;});
-      console.log(findResult);
-    } },
+      this.updataGoodsStatus(e);
+    } }),
 
   computed: _objectSpread({},
   (0, _vuex.mapState)('my_cart', ['cart'])) };exports.default = _default;

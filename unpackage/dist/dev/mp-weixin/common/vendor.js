@@ -3498,6 +3498,22 @@ var _default = {
       // 使用commit方法调用my_cart这个命名空间下的saveToStorage方法
       this.commit('my_cart/saveToStorage');
     },
+    // 更新商品勾选的方法
+    updataGoodsStatus: function updataGoodsStatus(state, goods) {
+      var findResult = state.cart.find(function (item) {return item.goods_id === goods.goods_id;});
+      if (findResult) {
+        findResult.goods_state = goods.goods_state;
+        this.commit('my_cart/saveToStorage');
+      }
+    },
+    // 更新商品购买数量
+    updateGoodsNum: function updateGoodsNum(state, goods) {
+      var findResult = state.cart.find(function (item) {return item.goods_id === goods.goods_id;});
+      if (findResult) {
+        findResult.goods_count = goods.goods_count;
+        this.commit('my_cart/saveToStorage');
+      }
+    },
     // 将购物车商品数据存储到本地方法
     saveToStorage: function saveToStorage(state) {
       uni.setStorageSync('cart', JSON.stringify(state.cart));
@@ -3506,7 +3522,6 @@ var _default = {
   // 对state数据处理的核心模块
   getters: {
     total: function total(state) {
-      console.log(state.cart);
       var allCount = 0;
       // 循环遍历数组，实现总和
       state.cart.forEach(function (item) {return allCount += item.goods_count;});
