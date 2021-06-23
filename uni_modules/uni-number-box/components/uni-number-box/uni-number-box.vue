@@ -55,7 +55,15 @@
 		watch: {
 			value(val) {
 				this.inputValue = +val;
-			}
+			},
+      // 对用户输入关键字进行监听
+      inputValue(newVal,oldVal) {
+        // 用户输入的新旧值不一样 
+        // 输入值必须为number类型
+        if(+newVal !== +oldVal && Number(newVal) && String(newVal).indexOf('.') === -1 ) {
+          this.$emit('change',newVal)
+        }
+      }
 		},
 		created() {
 			this.inputValue = +this.value;

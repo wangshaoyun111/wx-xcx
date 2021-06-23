@@ -8,10 +8,10 @@ export default {
   },
   methods: {
     // 动态为tabbar设置徽章方法
-    setBadge() {
+    setBadge(e) {
       uni.setTabBarBadge({
         index: 2, // 给第几项添加索引
-        text: this.total + '' // text要求时字符串类型，需要转换成字符
+        text: e || this.total + '' // text要求时字符串类型，需要转换成字符
       })
     }
   },
@@ -20,10 +20,11 @@ export default {
   },
   watch: {
     total(newVal) {
-      uni.setTabBarBadge({
-        index: 2, // 给第几项添加索引
-        text: newVal + '' // text要求时字符串类型，需要转换成字符
-      })
+      this.setBadge((newVal + ''))
+      // uni.setTabBarBadge({
+      //   index: 2, // 给第几项添加索引
+      //   text: newVal + '' // text要求时字符串类型，需要转换成字符
+      // })
     }
   }
 }
