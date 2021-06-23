@@ -2339,10 +2339,10 @@ _requestMiniprogram.$http.afterRequest = function () {
 
 
 
-      this.$emit('click', {
-        content: item,
-        index: index,
-        position: position });
+
+
+
+
 
     },
     getButtonSize: function getButtonSize() {var _this3 = this;
@@ -3679,6 +3679,12 @@ var _default = {
         findResult.goods_count = goods.goods_count;
         this.commit('my_cart/saveToStorage');
       }
+    },
+    // 根据id删除指定商品
+    deleteGoods: function deleteGoods(state, goodsId) {
+      // 使用filter方法筛选id不一样数据
+      state.cart = state.cart.filter(function (item) {return item.goods_id !== goodsId;});
+      this.commit('my_cart/saveToStorage');
     },
     // 将购物车商品数据存储到本地方法
     saveToStorage: function saveToStorage(state) {

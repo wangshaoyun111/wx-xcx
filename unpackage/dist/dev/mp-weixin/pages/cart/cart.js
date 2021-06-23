@@ -204,10 +204,10 @@ var _tabbarBadge = _interopRequireDefault(__webpack_require__(/*! ../../mixins/t
 
   },
   methods: _objectSpread(_objectSpread({},
-  (0, _vuex.mapMutations)('my_cart', ['updataGoodsStatus', 'updateGoodsNum'])), {}, {
+  (0, _vuex.mapMutations)('my_cart', ['updataGoodsStatus', 'updateGoodsNum', 'deleteGoods'])), {}, {
     // 从商品列表中删除对应商品
-    deleteGoods: function deleteGoods(goods) {
-      console.log(goods);
+    deleteGoodsItem: function deleteGoodsItem(goods) {
+      this.deleteGoods(goods.goods_id);
     },
     // 改变购买数量
     numChange: function numChange(e) {

@@ -9,7 +9,7 @@
     <view class="cart-list">
       <uni-swipe-action>
         <block v-for="(item,index) in cart" :key="index">
-          <uni-swipe-action-item @click="deleteGoods(item)" :rightOptions="rightOptions">
+          <uni-swipe-action-item :rightOptions="rightOptions" @click="deleteGoodsItem(item)">
             <my-goods @num-change="numChange" :show-num="true" @radia-change="radioChangeHandler" :showRadio="true"
               :goods="item"></my-goods>
           </uni-swipe-action-item>
@@ -40,10 +40,10 @@
       };
     },
     methods: {
-      ...mapMutations('my_cart', ['updataGoodsStatus', 'updateGoodsNum']),
+      ...mapMutations('my_cart', ['updataGoodsStatus', 'updateGoodsNum','deleteGoods']),
       // 从商品列表中删除对应商品
-      deleteGoods(goods){
-        console.log(goods);
+      deleteGoodsItem(goods){
+        this.deleteGoods(goods.goods_id)
       },
       // 改变购买数量
       numChange(e) {

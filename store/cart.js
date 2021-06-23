@@ -36,6 +36,12 @@ export default {
         this.commit('my_cart/saveToStorage')
       }
     },
+    // 根据id删除指定商品
+    deleteGoods(state,goodsId){
+      // 使用filter方法筛选id不一样数据
+      state.cart = state.cart.filter(item => item.goods_id !== goodsId)
+      this.commit('my_cart/saveToStorage')
+    },
     // 将购物车商品数据存储到本地方法
     saveToStorage(state){
       uni.setStorageSync('cart',JSON.stringify(state.cart))
