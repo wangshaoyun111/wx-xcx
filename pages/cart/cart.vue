@@ -5,6 +5,10 @@
       <uni-icons type="shop" size="18"></uni-icons>
       <text class="cart-title-text">购物车</text>
     </view>
+    
+    <!-- 收货地址区域 -->
+    <my-address></my-address>
+    
     <!-- 渲染商品列表区域 -->
     <view class="cart-list">
       <uni-swipe-action>
