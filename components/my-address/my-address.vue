@@ -5,7 +5,7 @@
       <button @click="btnChooseAddress" type="primary" size="mini" class="btnChooseAddress">请选择收货地址+</button>
     </view>
     <!-- 渲染收货信息的盒子 -->
-    <view class="address-info-box" v-else>
+    <view class="address-info-box" @click="btnChooseAddress" v-else>
       <view class="row1">
         <view class="row1-left">
           <view class="username">收货人：<text>{{address.userName}}</text></view>
@@ -30,7 +30,7 @@
     name: "my-address",
     data() {
       return {
-        address: {} // 收货地址
+        address: JSON.parse(uni.getStorageSync('address') || '{}') // 收货地址
       };
     },
     methods: {
@@ -41,8 +41,12 @@
         const [error, successRes] = await uni.chooseAddress()
         if(error === null && successRes.errMsg === 'chooseAddress:ok'){
           this.address = successRes
-          console.log(this.address);
+          this.saveAddressToStorage(this.address);
         }
+      },
+      // 收获地址持久化存储方法
+      saveAddressToStorage(address){
+        uni.setStorageSync('address',JSON.stringify(address))
       }
     },
     computed:{
