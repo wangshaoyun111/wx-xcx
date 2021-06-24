@@ -9,15 +9,15 @@
 
       <!-- 合计区域 -->
       <view class="amount-box">
-        合计:<text class="amount">￥1234.00</text>
+        合计:<text class="amount">￥{{checkedGoodsAllPrice}}</text>
       </view>
-      <view class="btn-settle">结算({{allGoodsNum}})</view>
+      <view class="btn-settle" @click="setSettle">结算({{allGoodsNum}})</view>
     </view>
   </view>
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapState,mapGetters} from 'vuex'
   export default {
     name: "my-settle",
     data() {
@@ -25,8 +25,21 @@
 
       };
     },
+    methods:{
+      // 结算功能
+      setSettle(){
+        // 判断有么有勾选商品
+        if(!this.allGoodsNum) return uni.$showTost('请选择需要购买的商品')
+        // 判断有没有收货地址
+        const address = JSON.parse(uni.getStorageSync('address') || '{}')
+        if(JSON.stringify(address) === '{}') return uni.$showTost('请选择收货地址')
+        // 用户是否登录
+        if(!this.token) return uni.$showTost('请先登录')
+      }
+    },
     computed:{
-      ...mapGetters('my_cart',['allGoodsNum','total']),
+      ...mapState('my_user',['token']),
+      ...mapGetters('my_cart',['allGoodsNum','total','checkedGoodsAllPrice']),
       // 控制全选
       isFullCheck(){
         return this.allGoodsNum === this.total

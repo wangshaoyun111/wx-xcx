@@ -63,6 +63,10 @@ export default {
       // 函数接收两个参数，第一个上一次计算结果，第二项是数组每一项
       return state.cart.filter(item => item.goods_state).reduce((total,item) => 
         total += item.goods_count,0)
+    },
+    // 计算商品的总价格
+    checkedGoodsAllPrice(state){
+      return state.cart.filter(item => item.goods_state).reduce((total,item) => total += item.goods_price*item.goods_count,0).toFixed(2)
     }
   }
   

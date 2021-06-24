@@ -2506,15 +2506,18 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 15));
 
-var _cart = _interopRequireDefault(__webpack_require__(/*! ./cart.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 初始化store对象
+var _cart = _interopRequireDefault(__webpack_require__(/*! ./cart.js */ 16));
+
+var _user = _interopRequireDefault(__webpack_require__(/*! ./user.js */ 186));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 初始化store对象
 // 导入cart的store模块
+// 导入 user 用户模块
 // 将vuex挂载到vue上
 _vue.default.use(_vuex.default); // 创建实例store对象
-var store = new _vuex.default.Store({
-  modules: {
+var store = new _vuex.default.Store({ modules: {
     // 将cart的store模块挂在到 moudles上
     // 使用my_cart接收模块，想访问cart.js中成员需要调整为my_cart/cart
-    my_cart: _cart.default } });var _default =
+    my_cart: _cart.default,
+    my_user: _user.default } });var _default =
 
 
 store;exports.default = _default;
@@ -3707,8 +3710,37 @@ var _default = {
       // 函数接收两个参数，第一个上一次计算结果，第二项是数组每一项
       return state.cart.filter(function (item) {return item.goods_state;}).reduce(function (total, item) {return (
           total += item.goods_count);}, 0);
+    },
+    // 计算商品的总价格
+    checkedGoodsAllPrice: function checkedGoodsAllPrice(state) {
+      return state.cart.filter(function (item) {return item.goods_state;}).reduce(function (total, item) {return total += item.goods_price * item.goods_count;}, 0).toFixed(2);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 186:
+/*!****************************************************************!*\
+  !*** C:/Users/18611/Desktop/uni-app/firstuniapp/store/user.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 创建cart Vuex模块
+var _default = {
+  // 为cart模块开启命名空间
+  namespaced: true,
+  state: function state() {return {
+      user: '',
+      token: '' };},
+
+  // 操作state的核心模块
+  mutations: {},
+
+
+  // 对state数据处理的核心模块
+  getters: {} };exports.default = _default;
 
 /***/ }),
 
