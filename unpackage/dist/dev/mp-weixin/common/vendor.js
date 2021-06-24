@@ -3698,6 +3698,15 @@ var _default = {
       // 循环遍历数组，实现总和
       state.cart.forEach(function (item) {return allCount += item.goods_count;});
       return allCount;
+    },
+    // 勾选商品总数量
+    allGoodsNum: function allGoodsNum(state) {
+      // 1.筛选出勾选得商品
+      // 2.reduce对数字没一项做计算使用
+      // 接收第一项函数作为参数,第二项就是累加开始值，默认0
+      // 函数接收两个参数，第一个上一次计算结果，第二项是数组每一项
+      return state.cart.filter(function (item) {return item.goods_state;}).reduce(function (total, item) {return (
+          total += item.goods_count);}, 0);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
@@ -10563,15 +10572,15 @@ if (hadRuntime) {
     setBadge: function setBadge(e) {
       uni.setTabBarBadge({
         index: 2, // 给第几项添加索引
-        text: e || this.total + '' // text要求时字符串类型，需要转换成字符
+        text: e || this.allGoodsNum + '' // text要求时字符串类型，需要转换成字符
       });
     } },
 
   computed: _objectSpread({},
-  (0, _vuex.mapGetters)('my_cart', ['total'])),
+  (0, _vuex.mapGetters)('my_cart', ['allGoodsNum'])),
 
   watch: {
-    total: function total(newVal) {
+    allGoodsNum: function allGoodsNum(newVal) {
       this.setBadge(newVal + '');
       // uni.setTabBarBadge({
       //   index: 2, // 给第几项添加索引

@@ -11,15 +11,15 @@ export default {
     setBadge(e) {
       uni.setTabBarBadge({
         index: 2, // 给第几项添加索引
-        text: e || this.total + '' // text要求时字符串类型，需要转换成字符
+        text: e || this.allGoodsNum + '' // text要求时字符串类型，需要转换成字符
       })
     }
   },
   computed: {
-    ...mapGetters('my_cart', ['total'])
+    ...mapGetters('my_cart', ['allGoodsNum'])
   },
   watch: {
-    total(newVal) {
+    allGoodsNum(newVal) {
       this.setBadge((newVal + ''))
       // uni.setTabBarBadge({
       //   index: 2, // 给第几项添加索引

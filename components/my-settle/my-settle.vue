@@ -11,18 +11,22 @@
       <view class="amount-box">
         合计:<text class="amount">￥1234.00</text>
       </view>
-      <view class="btn-settle">结算(0)</view>
+      <view class="btn-settle">结算({{allGoodsNum}})</view>
     </view>
   </view>
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
   export default {
     name: "my-settle",
     data() {
       return {
 
       };
+    },
+    computed:{
+      ...mapGetters('my_cart',['allGoodsNum'])
     }
   }
 </script>

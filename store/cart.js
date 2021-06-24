@@ -54,6 +54,15 @@ export default {
       // 循环遍历数组，实现总和
       state.cart.forEach(item => allCount += item.goods_count)
       return allCount
+    },
+    // 勾选商品总数量
+    allGoodsNum(state) {
+      // 1.筛选出勾选得商品
+      // 2.reduce对数字没一项做计算使用
+      // 接收第一项函数作为参数,第二项就是累加开始值，默认0
+      // 函数接收两个参数，第一个上一次计算结果，第二项是数组每一项
+      return state.cart.filter(item => item.goods_state).reduce((total,item) => 
+        total += item.goods_count,0)
     }
   }
   
