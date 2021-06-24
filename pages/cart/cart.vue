@@ -20,6 +20,8 @@
         </block>
       </uni-swipe-action>
     </view>
+    <!-- 商品结算区域 -->
+    <my-settle></my-settle>
   </view>
 </template>
 
