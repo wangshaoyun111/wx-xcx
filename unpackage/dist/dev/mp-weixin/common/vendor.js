@@ -10572,21 +10572,14 @@ if (hadRuntime) {
     setBadge: function setBadge(e) {
       uni.setTabBarBadge({
         index: 2, // 给第几项添加索引
-        text: e || this.allGoodsNum + '' // text要求时字符串类型，需要转换成字符
+        text: e || this.total + '' // text要求时字符串类型，需要转换成字符
       });
     } },
 
   computed: _objectSpread({},
-  (0, _vuex.mapGetters)('my_cart', ['allGoodsNum'])),
+  (0, _vuex.mapGetters)('my_cart', ['total'])),
 
-  watch: {
-    allGoodsNum: function allGoodsNum(newVal) {
-      this.setBadge(newVal + '');
-      // uni.setTabBarBadge({
-      //   index: 2, // 给第几项添加索引
-      //   text: newVal + '' // text要求时字符串类型，需要转换成字符
-      // })
-    } } };exports.default = _default;
+  watch: {} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

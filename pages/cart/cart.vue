@@ -78,4 +78,7 @@
       margin-left: 10px;
     }
   }
+  .cart-list{
+    margin-bottom: 40px;
+  }
 </style>
