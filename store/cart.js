@@ -42,6 +42,12 @@ export default {
       state.cart = state.cart.filter(item => item.goods_id !== goodsId)
       this.commit('my_cart/saveToStorage')
     },
+    // 控制全选的功能
+    updateAllGoodsState(state,newState){
+      
+      state.cart.forEach(item => item.goods_state = newState)
+      this.commit('my_cart/saveToStorage')
+    },
     // 将购物车商品数据存储到本地方法
     saveToStorage(state){
       uni.setStorageSync('cart',JSON.stringify(state.cart))

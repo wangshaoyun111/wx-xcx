@@ -3,7 +3,7 @@
     <!-- 最外层的容器 -->
     <view class="my-settle-container">
       <!-- 全选区域 -->
-      <label class="radio">
+      <label class="radio" @click="changeAllStatus">
         <radio color="#C00000" :checked="isFullCheck" /><text>全选</text>
       </label>
 
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import {mapState,mapGetters} from 'vuex'
+  import {mapState,mapGetters,mapMutations} from 'vuex'
   export default {
     name: "my-settle",
     data() {
@@ -26,6 +26,10 @@
       };
     },
     methods:{
+      ...mapMutations('my_cart',['updateAllGoodsState']),
+      changeAllStatus(){
+        this.updateAllGoodsState(!this.isFullCheck)
+      },
       // 结算功能
       setSettle(){
         // 判断有么有勾选商品
